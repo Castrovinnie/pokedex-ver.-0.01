@@ -1,0 +1,98 @@
+{
+	"info": {
+		"_postman_id": "35aeb4b8-c0ef-42b7-ab12-505682b98619",
+		"name": "Pokedex",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21556170"
+	},
+	"item": [
+		{
+			"name": "getPokemon",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://pokeapi.co/api/v2/pokemon/?offset=1&limit=20",
+					"protocol": "https",
+					"host": [
+						"pokeapi",
+						"co"
+					],
+					"path": [
+						"api",
+						"v2",
+						"pokemon",
+						""
+					],
+					"query": [
+						{
+							"key": "offset",
+							"value": "1",
+							"description": "Número do primeiro pokémon da lista a ser retornada."
+						},
+						{
+							"key": "limit",
+							"value": "20",
+							"description": "Quantidade de pokémons da lista a ser retornada."
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getPokemonDetails",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://pokeapi.co/api/v2/pokemon/:id/",
+					"protocol": "https",
+					"host": [
+						"pokeapi",
+						"co"
+					],
+					"path": [
+						"api",
+						"v2",
+						"pokemon",
+						":id",
+						""
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "1",
+							"description": "Número do pokémon escolhido."
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
