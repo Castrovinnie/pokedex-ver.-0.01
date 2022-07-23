@@ -17,7 +17,7 @@ const Header = ({pageName }) => {
   return (
     <Header>
       <h1>{pageName}</h1>
-      <img src={logo} alt="" />
+      <img src={logo}/>
     </Header>
   )
 }

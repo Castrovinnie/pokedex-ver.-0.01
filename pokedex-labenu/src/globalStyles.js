@@ -1,13 +1,11 @@
-import { createGlobalStyle } from 'styled-components'
+// import { createGlobalStyle } from 'styled-components'
 
-const GlobalStyle = createGlobalStyle`
-  body {
-    position: relative;
-    width: 1440px;
-    height: 160px;
-    background-color: #5E5E5E;
+// const GlobalStyle = createGlobalStyle`
+//   body {
+
+//     background-color: pink;
     
-  }
-`
+//   }
+// `
 
-export default GlobalStyle
+// export default GlobalStyle

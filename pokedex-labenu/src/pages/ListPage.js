@@ -9,6 +9,7 @@ import logo from "../img/Logo.png";
 
 const Container = styled.div` 
 overflow-x: hidden;
+
 `
 
 const Header = styled.header`
