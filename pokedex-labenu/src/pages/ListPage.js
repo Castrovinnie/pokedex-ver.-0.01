@@ -28,19 +28,40 @@ img {
 `
 
 
-const Button = styled.button`
+const Pokedex = styled.button`
 display: flex;
 flex-direction: row;
 justify-content: center;
 align-items: center;
 padding: 4px 10px;
+
+position: absolute;
+width: 287px;
+height: 74px;
+left: 1440px;
+top: 41px;
+
+background: #33A4F5;
+border-radius: 8px;
 &:hover{
     cursor: pointer;
-    background-color: lightblue;
-    border-radius: 24px;
-    color: lightblue;
 }
 `
+const PokeP = styled.div`
+width: 106px;
+height: 36px;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 700;
+font-size: 24px;
+line-height: 36px;
+color: #FFFFFF;
+flex: none;
+order: 0;
+flex-grow: 0;
+`
+
 const Home = () => {
     const { states, setters, getters } = useContext(PokemonContext)
 
@@ -58,10 +79,6 @@ const Home = () => {
         history.push(`/pokedex`)
     }
 
-    const removePokedex = () => {
-        setPokedex([])
-        alert("Pokedex esvaziada com sucesso!")
-    }
 
     const cardsPoke = pokemon.filter((poke) => {
         return (!pokedex.some(e => e.url === poke.url))
@@ -77,20 +94,14 @@ const Home = () => {
         setOffset((value - 1) * 20)
     }
 
-
-
-
-    // console.log(pokemon);
     if (pokemon.length !== 0) {
         return <Container>
             <Header>
-                <Button onClick={goToPokedex}>
-                    Pokedex
-                </Button>
                 <img src={logo} alt="Logotipo pokemon" />
-                <Button onClick={removePokedex}>
-                    Esvaziar Pokedex
-                </Button>
+                <Pokedex onClick={goToPokedex}><PokeP>
+                     Pokedex
+                    </PokeP>
+                </Pokedex>
             </Header>
             <ContainerHome>
                 {cardsPoke}

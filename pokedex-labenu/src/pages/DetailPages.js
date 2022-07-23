@@ -6,6 +6,8 @@ import styled from 'styled-components';
 import logo from "../img/Logo.png";
 import { ContainerHome } from "./styled";
 import Fundo from '../img/Fundo.jpg';
+import { useRequestData } from "../hooks/requestData/requestData";
+import { renderType } from "../components/renderType/renderType"
 
 
 const Container = styled.div` 
@@ -27,17 +29,25 @@ img {
     }
 `
 
-const Button = styled.button`
-display: flex;
-flex-direction: row;
-justify-content: center;
-align-items: center;
-padding: 4px 10px;
+const TodosOsPokemons = styled.div`
+position: absolute;
+width: 210px;
+height: 36px;
+left: 100px;
+top: 62px;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 700;
+font-size: 24px;
+line-height: 36px;
+/* identical to box height */
+
+text-decoration-line: underline;
+
+color: #1A1A1A;
 &:hover{
     cursor: pointer;
-    background-color: lightblue;
-    border-radius: 24px;
-    color: lightblue;
 }
 `
 const NamePokemon = styled.div`
@@ -78,14 +88,57 @@ h2{
     margin: 0 auto;
 }
 `
+const Pokedex = styled.button`
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 4px 10px;
+
+position: absolute;
+width: 287px;
+height: 74px;
+left: 1440px;
+top: 41px;
+
+background: #33A4F5;
+border-radius: 8px;
+&:hover{
+    cursor: pointer;
+}
+`
+const PokeP = styled.div`
+width: 106px;
+height: 36px;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 700;
+font-size: 24px;
+line-height: 36px;
+color: #FFFFFF;
+flex: none;
+order: 0;
+flex-grow: 0;
+`
 
 
 
 const Detalhes = () => {
 
+
     const history = useHistory()
     const params = useParams()
     const [pokemon, setPokemon] = useState()
+    const [pokeDetails] = useRequestData(params.name)
+
+    let totalStats = 0
+    const renderStats = pokeDetails && pokeDetails.stats.map((status) => {
+        totalStats = totalStats + Number(status.base_stat)
+        return <li>{status.stat.name} - {status.base_stat}</li>
+    })
+
+
 
     useEffect(() => {
         axios.get(`https://pokeapi.co/api/v2/pokemon/${params.pokemon}`)
@@ -105,6 +158,7 @@ const Detalhes = () => {
         history.push(`/pokedex`)
     }
 
+
     if (pokemon) {
 
         const types = pokemon.types.map((item) => {
@@ -117,25 +171,43 @@ const Detalhes = () => {
         return (
             <Container >
                 <Header>
-                    <Button onClick={goToHome}>
+                    <TodosOsPokemons onClick={goToHome}>
                         Página Inicial
-                    </Button>
+                    </TodosOsPokemons>
                     <img src={logo} alt="Logotipo pokemon" />
-                    <Button onClick={goToPokedex}>
+                    <Pokedex onClick={goToPokedex}><PokeP>
                         Pokedex
-                    </Button>
+                    </PokeP></Pokedex>
                 </Header>
 
                 <ContainerHome key={pokemon.id}>
                     <DataContainer>
                         <NamePokemon>
+                            <h3># {pokeDetails && pokeDetails.id}</h3>
                             <h1>{pokemon.name.toUpperCase()}</h1>
+                            <div>
+                                {pokeDetails && renderType(pokeDetails.types[0].type.name)}
+                                {pokeDetails && pokeDetails.types[1] && renderType(pokeDetails.types[1].type.name)}
+                            </div>
+                            
                             <div className='images'>
                                 <img src={pokemon.sprites.front_default} alt={`${pokemon.name} de frente`} />
                                 <img src={pokemon.sprites.back_default} alt={`${pokemon.name} de costas`} />
                             </div>
+                            <h4>Moves</h4>
+                            <ul>
+                                <li>{pokeDetails && pokeDetails.moves[0].move.name}</li>
+                                <li>{pokeDetails && pokeDetails.moves[1].move.name}</li>
+                                <li>{pokeDetails && pokeDetails.moves[2].move.name}</li>
+                                <li>{pokeDetails && pokeDetails.moves[3].move.name}</li>
+                            </ul>
+                            <h4>Base Stats</h4>
+                            <ul>
+                                {renderStats}
+                                <li>total - {totalStats}</li>
+                            </ul>
                         </NamePokemon>
-                        
+
                     </DataContainer>
                 </ContainerHome>
 

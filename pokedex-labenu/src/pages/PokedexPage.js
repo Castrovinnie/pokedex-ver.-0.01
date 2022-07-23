@@ -34,12 +34,50 @@ flex-direction: row;
 justify-content: center;
 align-items: center;
 padding: 4px 10px;
+
+position: absolute;
+width: 226px;
+height: 57px;
+left: 1440px;
+top: 51px;
+
+background: #FF6262;
+border-radius: 8px;
 &:hover{
     cursor: pointer;
-    background-color: lightblue;
-    border-radius: 24px;
-    color: lightblue;
 }
+`
+
+const TodosOsPokemons = styled.div`
+position: absolute;
+width: 210px;
+height: 36px;
+left: 100px;
+top: 62px;
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 700;
+font-size: 24px;
+line-height: 36px;
+/* identical to box height */
+
+text-decoration-line: underline;
+
+color: #1A1A1A;
+&:hover{
+    cursor: pointer;
+}
+`
+const OhNo = styled.div`
+position: absolute;
+width: 451px;
+height: 222px;
+left: 0px;
+top: 0px;
+
+background: #FFFFFF;
+border-radius: 12px;
 `
 
 const Pokedex = () => {
@@ -78,9 +116,9 @@ const Pokedex = () => {
 
         return <Container>
             <Header>
-                <Button onClick={goToHome}>
-                    Página Inicial
-                </Button>
+               <TodosOsPokemons onClick={goToHome}>
+                    Todos os Pokemons
+               </TodosOsPokemons> 
                 <img src={logo} alt="Logotipo pokemon" />
                 <Button onClick={removePokedex}>
                     Esvaziar Pokedex
@@ -95,9 +133,9 @@ const Pokedex = () => {
     } else {
         return <Container>
             <Header>
-                <Button onClick={goToHome}>
+                <TodosOsPokemons onClick={goToHome}>
                     Página Inicial
-                </Button>
+                </TodosOsPokemons>
                 <img src={logo} alt="" />
 
             </Header>
